@@ -2,6 +2,8 @@
 
 语音转文字输入工具，基于 SenseVoice (MLX) 本地识别，按一下 Option 键说话，松开自动输入到当前输入框。
 
+> 📺 视频介绍：[语音输入法,巨快无比](https://www.bilibili.com/video/BV1YLEp6KECM/)
+
 ## 特性
 
 - **MLX 加速**：Apple Silicon 原生推理，识别仅 0.1s
