@@ -1,0 +1,20 @@
+#!/bin/bash
+# VoiceTyper — 静默启动，不显示终端
+PROJ_DIR="$HOME/Desktop/VoiceTyper"
+source "$PROJ_DIR/sensevoice-env/bin/activate"
+
+# 确保 Daemon 在跑
+if ! launchctl list | grep -q com.voicetyper.daemon; then
+    launchctl load ~/Library/LaunchAgents/com.voicetyper.daemon.plist
+fi
+
+# 等 socket 就绪
+for i in $(seq 1 30); do
+    [ -S /tmp/voicetyper.sock ] && break
+    sleep 1
+done
+
+[ ! -S /tmp/voicetyper.sock ] && exit 1
+
+# 静默运行客户端（无终端窗口）
+exec python3 "$PROJ_DIR/voicetyper.py" &>/dev/null &
